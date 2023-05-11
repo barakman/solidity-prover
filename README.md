@@ -21,7 +21,9 @@ At the time of writing this document:
 ```
 
 Consider a system with a storage requirement too expensive to execute onchain.
+
 For example, updating 500 storage slots can cost more than 10 million gas units.
+
 Ideally, we would want to somehow store the information offchain in a trustless manner.
 
 The `Prover` contract supports this L2-like implementation in the following way:
