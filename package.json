@@ -1,0 +1,26 @@
+{
+    "name": "solidity-prover",
+    "version": "1.0.0",
+    "description": "store contract state offchain in a trustless manner",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/barakman/solidity-prover.git"
+    },
+    "author": "Barak Manos",
+    "license": "ISC",
+    "files": [
+        "project/contracts/*.sol"
+    ],
+    "scripts": {
+        "build": "hardhat compile",
+        "test": "hardhat test --bail",
+        "verify": "hardhat coverage"
+    },
+    "devDependencies": {
+        "@nomiclabs/hardhat-truffle5": "2.0.7",
+        "@nomiclabs/hardhat-web3": "2.0.0",
+        "@openzeppelin/contracts": "4.8.3",
+        "hardhat": "2.14.0",
+        "solidity-coverage": "0.8.2"
+    }
+}
