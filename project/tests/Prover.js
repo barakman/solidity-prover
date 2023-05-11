@@ -30,8 +30,7 @@ contract("Prover", () => {
         it(`updateAll(${delta})`, async () => {
             const response = await prover.updateAll(actual, delta);
             actual = readState(response);
-            for (let i = 0; i < expected.length; i++)
-                expected[i].iaddn(delta);
+            expected.forEach(value => value.iaddn(delta));
             assert.deepEqual(actual, expected);
         });
     }
