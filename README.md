@@ -4,7 +4,7 @@ Storage access is generally the most expensive operation:
 - Storage write is the 1st most expensive operation
 - Storage read is the 3rd most expensive operation
 
-At the time of writing this:
+At the time of writing this document:
 ```
 +-----------------------------------------+-----------------+
 | Storage Operation                       | Gas Consumption |
@@ -45,19 +45,19 @@ In every contract which derives from the `Prover` contract, every function which
 
 The offchain caller of such function can obtain that state by fetching the most recent `Updated` event.
 
-### Function `authenticate(uint256[] calldata array) internal view returns (bool)`
+### `authenticate(uint256[] calldata array) internal view returns (bool)`
 
 This function returns true if and only if the input state is authentic.
 
-### Function `generalUpdate(uint256[] memory array) internal`
+### `generalUpdate(uint256[] memory array) internal`
 
 This function updates the state of the contract and emits it in an event.
 
-### Function `appendAndUpdate(uint256[] calldata array, uint256 value) internal`
+### `appendAndUpdate(uint256[] calldata array, uint256 value) internal`
 
 This function appends a single 256-bit value to the state of the contract and emits it in an event.
 
-### Function `removeAndUpdate(uint256[] calldata array, uint256 index) internal`
+### `removeAndUpdate(uint256[] calldata array, uint256 index) internal`
 
 This function removes a single 256-bit value from the state of the contract and emits it in an event.
 
