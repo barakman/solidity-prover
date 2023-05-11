@@ -2,32 +2,23 @@
 pragma solidity 0.8.20;
 
 import "../Prover.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract TestProver is Prover {
-    IERC20 private immutable _token;
-
-    constructor(IERC20 token) {
-        _token = token;
+    function appendOne(uint256[] calldata array, uint256 value) external {
+        authenticate(array);
+        appendAndUpdate(array, value);
     }
 
-    function deposit(uint256[] calldata balances, uint256 value) external {
-        authenticate(balances);
-        _token.transferFrom(msg.sender, address(this), value);
-        appendAndUpdate(balances, value);
+    function removeOne(uint256[] calldata array, uint256 index) external {
+        authenticate(array);
+        removeAndUpdate(array, index);
     }
 
-    function withdrawAll(uint256[] calldata balances, uint256 index) external {
-        authenticate(balances);
-        _token.transfer(msg.sender, balances[index]);
-        removeAndUpdate(balances, index);
-    }
-
-    function withdrawSome(uint256[] calldata balances, uint256 index, uint256 value) external {
-        authenticate(balances);
-        _token.transfer(msg.sender, value);
-        uint256[] memory newBalances = balances;
-        newBalances[index] -= value;
-        generalUpdate(newBalances);
+    function updateAll(uint256[] calldata array, uint256 delta) external {
+        authenticate(array);
+        uint256[] memory newArray = new uint256[](array.length);
+        for (uint256 i = 0; i < array.length; i++)
+            newArray[i] = array[i] + delta;
+        generalUpdate(newArray);
     }
 }
