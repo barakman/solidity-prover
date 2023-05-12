@@ -41,42 +41,27 @@ contract("Prover", () => {
         return [...Array(data.length / 64).keys()].map(i => toBN("0x" + data.substr(i * 64, 64)));
     }
 
+    function repeat(n, func) {
+        for (let i = 0; i < n; i++)
+            func(i);
+    }
+
     before(async () => {
         prover = await Prover.new();
     });
 
-    for (let i = 0; i < 10; i++)
-        appendOne(i);
-
+    repeat(20, i => appendOne(i));
     updateAll(1);
-
-    for (let i = 0; i < 5; i++)
-        removeOne(0);
-
+    repeat(10, i => removeOne(0));
     updateAll(2);
-
-    for (let i = 0; i < 10; i++)
-        appendOne(i);
-
+    repeat(20, i => appendOne(i));
     updateAll(3);
-
-    for (let i = 0; i < 5; i++)
-        removeOne((15 - i) - 1);
-
+    repeat(10, i => removeOne((30 - i) - 1));
     updateAll(4);
-
-    for (let i = 0; i < 10; i++)
-        appendOne(i);
-
+    repeat(20, i => appendOne(i));
     updateAll(5);
-
-    for (let i = 0; i < 5; i++)
-        removeOne((20 - i) >> 1);
-
+    repeat(10, i => removeOne((40 - i) >> 1));
     updateAll(6);
-
-    for (let i = 0; i < 1000; i++)
-        appendOne(i);
-
+    repeat(1000, i => appendOne(i));
     updateAll(7);
 });
