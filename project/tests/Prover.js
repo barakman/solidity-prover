@@ -10,8 +10,7 @@ contract("Prover", () => {
 
     function appendOne(value) {
         it(`appendOne(${value})`, async () => {
-            const response = await prover.appendOne(actual, value);
-            actual = readState(response);
+            actual = await execute(prover.appendOne(actual, value));
             expected.push(toBN(value));
             assert.deepEqual(actual, expected);
         });
@@ -19,8 +18,7 @@ contract("Prover", () => {
 
     function removeOne(index) {
         it(`removeOne(${index})`, async () => {
-            const response = await prover.removeOne(actual, index);
-            actual = readState(response);
+            actual = await execute(prover.removeOne(actual, index));
             expected.splice(index, 1);
             assert.deepEqual(actual, expected);
         });
@@ -28,14 +26,14 @@ contract("Prover", () => {
 
     function updateAll(delta) {
         it(`updateAll(${delta})`, async () => {
-            const response = await prover.updateAll(actual, delta);
-            actual = readState(response);
+            actual = await execute(prover.updateAll(actual, delta));
             expected.forEach(value => value.iaddn(delta));
             assert.deepEqual(actual, expected);
         });
     }
 
-    function readState(response) {
+    async function execute(transaction) {
+        const response = await transaction;
         console.log(response.receipt.gasUsed);
         const data = response.logs[0].args.state ? response.logs[0].args.state.slice(2) : "";
         return [...Array(data.length / 64).keys()].map(i => toBN("0x" + data.substr(i * 64, 64)));
