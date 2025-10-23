@@ -73,8 +73,8 @@ This function removes a single 256-bit value from the state of the contract and 
 
 ### Prerequisites
 
-- `node 16.13.0`
-- `yarn 1.22.10` or `npm 8.1.0`
+- `node 22.21.0`
+- `yarn 1.22.22` or `npm 10.9.4`
 
 ### Installation
 
